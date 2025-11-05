@@ -1,0 +1,9 @@
+{
+  "python.defaultInterpreterPath": "./venv",
+  "python.analysis.extraPaths": ["./src"],
+  "python.testing.pytestEnabled": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true
+  }
+}
