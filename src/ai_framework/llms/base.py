@@ -1,4 +1,3 @@
-# src/ai_framework/llms/base.py
 from abc import ABC, abstractmethod
 from typing import Any, Dict
 
@@ -9,7 +8,7 @@ class LLM(ABC):
     @abstractmethod
     async def call(
         self, prompt: str, **kwargs: Any
-    ) -> str:  # ⬅️ сделать call абстрактным
+    ) -> str:
         """Main method to call the LLM with a prompt"""
         pass
 
