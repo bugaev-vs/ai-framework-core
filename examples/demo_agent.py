@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Demo script showing the complete framework in action
 """
@@ -13,7 +12,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 from ai_framework.llms.fake import FakeLLM
 from ai_framework.tools.calculator import CalculatorTool
 from ai_framework.tools.search import SearchTool
-from ai_framework.agents.base import SimpleAgent  # ⬅️ ПРОВЕРЬТЕ ЭТУ СТРОКУ
+from ai_framework.agents.base import SimpleAgent
 
 
 async def main():
@@ -27,7 +26,7 @@ async def main():
     search_tool = SearchTool()
     
     # Create agent
-    agent = SimpleAgent(  # ⬅️ И ЭТУ СТРОКУ
+    agent = SimpleAgent(
         llm=llm,
         tools=[calculator, search_tool],
         verbose=True
