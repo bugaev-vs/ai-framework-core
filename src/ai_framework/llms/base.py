@@ -1,29 +1,20 @@
+# src/ai_framework/llms/base.py
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Optional
-import asyncio
+from typing import Any, Dict
 
 
 class LLM(ABC):
     """Abstract base class for all Language Models"""
     
-    def __init__(self, model_name: str, **kwargs):
-        self.model_name = model_name
-        self.config = kwargs
-    
     @abstractmethod
-    async def _call(self, prompt: str, **kwargs) -> str:
-        """Main method to call the LLM - must be implemented by subclasses"""
+    async def call(self, prompt: str, **kwargs: Any) -> str:  # ⬅️ сделать call абстрактным
+        """Main method to call the LLM with a prompt"""
         pass
     
-    async def call(self, prompt: str, **kwargs) -> str:
-        """Public method with optional preprocessing and error handling"""
-        try:
-            result = await self._call(prompt, **kwargs)
-            return result
-        except Exception as e:
-            print(f"Error calling LLM: {e}")
-            raise
-    
-    def __call__(self, prompt: str, **kwargs) -> str:
-        """Sync call interface using asyncio"""
-        return asyncio.run(self.call(prompt, **kwargs))
+    async def call_with_metadata(self, prompt: str, **kwargs: Any) -> Dict[str, Any]:
+        """Call LLM and return response with metadata"""
+        content = await self.call(prompt, **kwargs)
+        return {
+            "content": content,
+            "model": self.__class__.__name__
+        }
